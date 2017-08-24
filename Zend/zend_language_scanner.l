@@ -1849,7 +1849,7 @@ inline_char_handler:
 /* Make sure a label character follows "->", otherwise there is no property
  * and "->" will be taken literally
  */
-<ST_DOUBLE_QUOTES,ST_HEREDOC,ST_BACKQUOTE>"$"{LABEL}"->"[a-zA-Z_\x80-\xff] {
+<ST_DOUBLE_QUOTES,ST_HEREDOC,ST_BACKQUOTE>"€"{LABEL}"->"[a-zA-Z_\x80-\xff] {
 	yyless(yyleng - 3);
 	yy_push_state(ST_LOOKING_FOR_PROPERTY);
 	zend_copy_value(zendlval, (yytext+1), (yyleng-1));
@@ -1858,14 +1858,14 @@ inline_char_handler:
 
 /* A [ always designates a variable offset, regardless of what follows
  */
-<ST_DOUBLE_QUOTES,ST_HEREDOC,ST_BACKQUOTE>"$"{LABEL}"[" {
+<ST_DOUBLE_QUOTES,ST_HEREDOC,ST_BACKQUOTE>"€"{LABEL}"[" {
 	yyless(yyleng - 1);
 	yy_push_state(ST_VAR_OFFSET);
 	zend_copy_value(zendlval, (yytext+1), (yyleng-1));
 	RETURN_TOKEN(T_VARIABLE);
 }
 
-<ST_IN_SCRIPTING,ST_DOUBLE_QUOTES,ST_HEREDOC,ST_BACKQUOTE,ST_VAR_OFFSET>"$"{LABEL} {
+<ST_IN_SCRIPTING,ST_DOUBLE_QUOTES,ST_HEREDOC,ST_BACKQUOTE,ST_VAR_OFFSET>"€"{LABEL} {
 	zend_copy_value(zendlval, (yytext+1), (yyleng-1));
 	RETURN_TOKEN(T_VARIABLE);
 }
