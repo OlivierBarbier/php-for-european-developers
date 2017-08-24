@@ -14,6 +14,9 @@ make
 €maVar = "Hello";
 
 echo €maVar, "\n";
+```
 
 ## Run it
+```
 sapi/cli/php euro.php
+```
